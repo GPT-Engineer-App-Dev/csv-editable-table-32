@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Papa from "papaparse";
-
+import { saveAs } from "file-saver";
 
 const CsvTool = () => {
   const [data, setData] = useState([]);
@@ -44,12 +44,7 @@ const CsvTool = () => {
   const handleDownload = () => {
     const csv = Papa.unparse(data);
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.setAttribute("download", "edited_data.csv");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    saveAs(blob, "edited_data.csv");
   };
 
   return (
