@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Papa from "papaparse";
-import { json2csv } from "json2csv";
+
 
 const CsvTool = () => {
   const [data, setData] = useState([]);
@@ -42,7 +42,7 @@ const CsvTool = () => {
   };
 
   const handleDownload = () => {
-    const csv = json2csv(data);
+    const csv = Papa.unparse(data);
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
